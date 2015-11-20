@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    android:paddingLeft="16dp">
+
+    <ImageView
+        android:id="@+id/tarefa_icon"
+        android:layout_alignParentLeft="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@null" />
+
+    <TextView
+        android:id="@+id/tarefa_titulo"
+        android:text="TITULO"
+        android:textColor="@color/colorPrimarytext"
+        android:layout_toRightOf="@+id/tarefa_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:paddingRight="16dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tarefa_descricao"
+        android:text="Descrição da Tarefa"
+        android:textColor="@color/colorPrimarytext"
+        android:layout_below="@+id/tarefa_titulo"
+        android:layout_alignLeft="@+id/tarefa_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/bt_iniciar"
+        android:text="Iniciar"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_above="@+id/bt_concluir"
+        android:layout_alignRight="@+id/vw_divider"
+        android:onClick="btIniciarOnClick"/>
+
+    <Button
+        android:id="@+id/bt_concluir"
+        android:text="Concluir"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_above="@+id/vw_divider"
+        android:layout_alignRight="@+id/vw_divider"
+        android:onClick="btConcluirOnClick"/>
+
+
+    <View
+        android:id="@+id/vw_divider"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_below="@+id/tarefa_icon"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
