@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Trabalho Final</string>
-
     <string name="btAdicionarTarefa">Adicionar Tarefa</string>
+
     <string name="action_settings">Settings</string>
+
+    <string name="bt_iniciar">Iniciar</string>
+    <string name="bt_concluir">Concluir</string>
+
+    <string name="NotaTarefa">Nova Tarefa</string>
+    <string name="ed_titulo">Título</string>
+    <string name="ed_descricao">Descrição</string>
+    <string name="ed_qtd">Quantidade de Pomodoros</string>
+    <string name="btSalvarTarefa">Salvar Tarefa</string>
 </resources>

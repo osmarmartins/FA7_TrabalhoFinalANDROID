@@ -1,5 +1,10 @@
 package br.edu.fa7.trabalhofinal.dao;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,28 +15,76 @@ import br.edu.fa7.trabalhofinal.model.Pomodoro;
  */
 public class PomodoroDao {
 
+    private final String TABLE_NAME = "pomodoros";
+    private PomodoroDatabase myDatabase;
+    private SQLiteDatabase db;
+    private Pomodoro pomodoro;
+
+
+    private List<Pomodoro> lista;
+
+    public PomodoroDao(Context context){
+        myDatabase = new PomodoroDatabase(context);
+        db = myDatabase.getReadableDatabase();
+
+    }
+
+    public void insert(Pomodoro pomodoro){
+        ContentValues values = new ContentValues();
+        values.put("titulo", pomodoro.getTitulo());
+        values.put("descricao", pomodoro.getDescricao());
+        values.put("qtd_pomodoro", pomodoro.getQtd_pomodoro());
+        values.put("situacao", 0);
+
+        db.insert(TABLE_NAME, null, values);
+    }
+
+
+    public void update(Context c){
+
+    }
+
+
+    public void delete(Context c){
+
+    }
+
+
+
+    public Pomodoro find(Context c, Integer arg){
+        Pomodoro pomodoro;
+        pomodoro = new Pomodoro();
+
+        return pomodoro;
+    }
+
+
+
     public List<Pomodoro> findAll(){
 
-        Integer[] id = {1, 2, 3, 4};
-        String[] titulo = {"Lavar Carro", "Fazer Compras", "Consertar TV", "Preparar Churrasco"};
-        String[] descrição = {"Lavar o carro, asprirar, limpar pneus", "Comprar para churrasco com amigos",
-                              "Preparar a instalação da TV no deck", "Fazer o fogo, preparar carnes"};
-        Integer[] qtd = {2, 3, 1, 6};
-        Integer[] situacao = {0, 0, 0, 0};
+        List<Pomodoro> pomodoros = null;
+        Cursor c = db.query(TABLE_NAME, null, null, null, null, null, " _id ASC ");
 
+        if(c.getCount() > 0){
+            pomodoros = new ArrayList<>();
+            c.moveToFirst();
 
-        List<Pomodoro> lista = new ArrayList<>();
-        Pomodoro pomodoro;
-        for(int i=0; i<4; i++){
-            pomodoro = new Pomodoro(id[i], titulo[i], descrição[i], qtd[i], situacao[i]);
-            lista.add(pomodoro);
+            do{
+                Pomodoro pomodoro = new Pomodoro(
+                        c.getString(c.getColumnIndex("titulo")) +
+                                " ("+c.getInt(c.getColumnIndex("_id"))+") - " +
+                                c.getInt(c.getColumnIndex("situacao")),
+                        c.getString(c.getColumnIndex("descricao")),
+                        c.getInt(c.getColumnIndex("qtd_pomodoro")),
+                        c.getInt(c.getColumnIndex("situacao"))
+                );
+
+                pomodoros.add(pomodoro);
+
+            }while(c.moveToNext());
+
         }
 
-        for(int i=0; i<4; i++){
-            pomodoro = new Pomodoro(id[i]+4, titulo[i], descrição[i], qtd[i], situacao[i]);
-            lista.add(pomodoro);
-        }
-
-        return lista;
+        return pomodoros;
     }
 }

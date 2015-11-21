@@ -11,6 +11,10 @@ public class Pomodoro {
     private Integer qtd_pomodoro;
     private Integer situacao; // 0-Aguardando, 1-Iniciado, 2-Concluido
 
+    public Pomodoro(){
+
+    }
+
     public Pomodoro(Integer id_pomodoro, String titulo, String descricao, Integer qtd_pomodoro, Integer situacao) {
         this.id_pomodoro = id_pomodoro;
         this.titulo = titulo;
@@ -19,13 +23,14 @@ public class Pomodoro {
         this.situacao = situacao;
     }
 
-    public Pomodoro(String titulo, String descricao, Integer qtd_pomodoro, Integer situacao) {
+    public Pomodoro(String t, String d, Integer q, Integer s) {
         this.id_pomodoro = null;
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.qtd_pomodoro = qtd_pomodoro;
-        this.situacao = situacao;
+        this.titulo = t;
+        this.descricao = d;
+        this.qtd_pomodoro = q;
+        this.situacao = 0;
     }
+
 
     @Override
     public String toString() {

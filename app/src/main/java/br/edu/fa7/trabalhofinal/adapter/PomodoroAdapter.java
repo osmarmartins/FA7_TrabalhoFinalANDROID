@@ -1,11 +1,13 @@
 package br.edu.fa7.trabalhofinal.adapter;
 
 import android.content.Context;
+import android.nfc.TagLostException;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -27,10 +29,39 @@ public class PomodoroAdapter extends RecyclerView.Adapter<PomodoroAdapter.MyView
     }
 
 
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = mLayoutInflater.inflate(R.layout.item_pomodoro, parent, false);
-        MyViewHolder mvh = new MyViewHolder(v);
+        final MyViewHolder mvh = new MyViewHolder(v);
+
+        final Button btIniciar = (Button) v.findViewById(R.id.bt_iniciar);
+        final Button btConcluir = (Button) v.findViewById(R.id.bt_concluir);
+
+        btIniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = mvh.getAdapterPosition();
+                mList.get(position).setSituacao(1);
+                Log.i("log", "Botão Iniciar clicado.... Item: " + mList.get(position).toString());
+                btConcluir.setEnabled(true);
+                btIniciar.setEnabled(false);
+            }
+        });
+
+        btConcluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = mvh.getAdapterPosition();
+                mList.get(position).setSituacao(2);
+                Log.i("log", "Botão CONCLUIR clicado.... Item: "+mList.get(position).toString());
+                btConcluir.setEnabled(false);
+                mvh.itemView.setBackgroundColor(R.color.colorAccent);
+
+            }
+        });
+
+
         return mvh;
     }
 
@@ -38,6 +69,7 @@ public class PomodoroAdapter extends RecyclerView.Adapter<PomodoroAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tarefaTitulo.setText(mList.get(position).getTitulo());
         holder.tarefaDescricao.setText(mList.get(position).getDescricao());
+        holder.tarefaPomodoro.setText("Qtd. Pomodoro: " + mList.get(position).getQtd_pomodoro());
 
     }
 
@@ -48,19 +80,20 @@ public class PomodoroAdapter extends RecyclerView.Adapter<PomodoroAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView tarefaTitulo;
-        public TextView tarefaDescricao;
+        private TextView tarefaTitulo;
+        private TextView tarefaDescricao;
+        private TextView tarefaPomodoro;
+
 
         public MyViewHolder(View itemView){
             super(itemView);
 
             tarefaTitulo = (TextView) itemView.findViewById(R.id.tarefa_titulo);
             tarefaDescricao = (TextView) itemView.findViewById(R.id.tarefa_descricao);
+            tarefaPomodoro = (TextView) itemView.findViewById(R.id.tarefa_qtd_pomodoro);
+
 
         }
-
-
-
 
     }
 

@@ -1,13 +1,13 @@
 package br.edu.fa7.trabalhofinal.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import br.edu.fa7.trabalhofinal.R;
 import br.edu.fa7.trabalhofinal.fragment.PomodoroFragment;
@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.getSupportActionBar().setTitle("Técnica Pomodoro");
+        this.getSupportActionBar().setSubtitle("Lista de Tarefas");
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         this.tempoPomodoro = (TextView) findViewById(R.id.tempoPomodoro);
         this.tempoPomodoro.setText("00:00");
@@ -37,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btAdicionarTarefaOnClick(View view){
-        this.tempoPomodoro.setText("25:00");
-        Toast.makeText(this, "Adicionar Tarefa foi acionado....", Toast.LENGTH_LONG).show();
+        Intent it = new Intent(this, CadastroActivity.class);
+        startActivity(it);
     }
 
 
