@@ -18,7 +18,7 @@ public class ServiceTimer extends Service {
     private static final int MENSAGEM_TEMPO = 1;
 
     private IBinder binder;
-    private Boolean stop;
+    private static Boolean stop;
     private Integer segundos;
     private static String tempo = "00:00";
 
@@ -35,11 +35,15 @@ public class ServiceTimer extends Service {
     }
 
 
-    public static void getTempo(final Activity act, final TextView tv){
+    public static void getTimer(final Activity act, final TextView tv){
         act.runOnUiThread(new Runnable() {
                               @Override
                               public void run() {
-                                  tv.setText(tempo);
+                                  if(!stop) {
+                                      tv.setText(tempo);
+                                  }
+
+                                  Log.i("log", "getTimer - " + tv.getText());
                               }
                           }
         );

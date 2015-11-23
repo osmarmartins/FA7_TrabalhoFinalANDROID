@@ -37,6 +37,27 @@ public class PomodoroDatabase extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO pomodoros (titulo, descricao, qtd_pomodoro) " +
                 "VALUES ('CHURRASCO', 'Preparar a churrasqueira', 1);  ");
 
+
+
+
+        db.execSQL("INSERT INTO pomodoros (titulo, descricao, qtd_pomodoro) " +
+                "VALUES ('COMPRAS', 'Fazer compras de carnes e bebidas', 3);  ");
+
+        db.execSQL("INSERT INTO pomodoros (titulo, descricao, qtd_pomodoro) " +
+                "VALUES ('PREPARAR DECK', 'Limpar deck, piscina, organizar mesas e cadeiras',4);  ");
+
+        db.execSQL("INSERT INTO pomodoros (titulo, descricao, qtd_pomodoro) " +
+                "VALUES ('CHURRASCO', 'Preparar a churrasqueira', 1);  ");
+
+        db.execSQL("INSERT INTO pomodoros (titulo, descricao, qtd_pomodoro) " +
+                "VALUES ('COMPRAS', 'Fazer compras de carnes e bebidas', 3);  ");
+
+        db.execSQL("INSERT INTO pomodoros (titulo, descricao, qtd_pomodoro) " +
+                "VALUES ('PREPARAR DECK', 'Limpar deck, piscina, organizar mesas e cadeiras',4);  ");
+
+        db.execSQL("INSERT INTO pomodoros (titulo, descricao, qtd_pomodoro) " +
+                "VALUES ('CHURRASCO', 'Preparar a churrasqueira', 1);  ");
+
     }
 
     @Override

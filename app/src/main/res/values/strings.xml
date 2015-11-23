@@ -12,7 +12,7 @@
     <string name="bt_iniciar">Iniciar</string>
     <string name="bt_concluir">Concluir</string>
 
-    <string name="NotaTarefa">Nova Tarefa</string>
+    <string name="NotaTarefa">Dados da Tarefa</string>
     <string name="ed_titulo">Título</string>
     <string name="ed_descricao">Descrição</string>
     <string name="ed_qtd">Quantidade de Pomodoros</string>

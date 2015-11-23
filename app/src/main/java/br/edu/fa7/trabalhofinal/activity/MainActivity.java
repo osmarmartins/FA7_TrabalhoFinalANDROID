@@ -19,30 +19,7 @@ import br.edu.fa7.trabalhofinal.service.ServiceTimer;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tempoPomodoro;
-    private Handler handler;
-
-    private void serviceTimer(){
-        ServiceTimer.getTempo(this, (TextView) findViewById(R.id.tempoPomodoro));
-        Log.i("log", "Tempo inicial " + tempoPomodoro.getText());
-
-    }
-
-    private void threadTempo(){
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        serviceTimer();
-                    }
-                }, 1000);
-            }
-        };
-    }
-
-
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         this.tempoPomodoro = (TextView) findViewById(R.id.tempoPomodoro);
+        tempoPomodoro.setText("Waiting...");
 
         threadTempo();
 
@@ -73,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Fragment da Lista de Tarefas
         PomodoroFragment pomodoroFragment = (PomodoroFragment) getSupportFragmentManager().findFragmentByTag("myPomodoroFragment");
-        if(pomodoroFragment == null) {
+        if (pomodoroFragment == null) {
             pomodoroFragment = new PomodoroFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_lista_tarefa, pomodoroFragment, "myPomodoroFragment");
@@ -83,26 +61,63 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void getTempoPomodoro(Activity act, TextView tv) {
+        ServiceTimer.getTimer(act, tv);
+    }
+
+    private void threadTempo() {
+        final Activity act = this;
+        final TextView tv = tempoPomodoro;
+        Log.i("log", "Entrou em  threadTempo");
+
+        new Thread() {
+            @Override
+            public void run() {
+                try{
+                    Log.i("log", "new Thread. Executou getTempoPomodoro");
+                    getTempoPomodoro(act, tv);
+                    handler.postDelayed(getRunnable(), 1000);
+
+                }catch (Exception e){
+                    Log.i("log", "ERRO: "+e.getMessage());
+
+                }
+
+            }
+        }.start();
+    }
+
+    private Runnable getRunnable() {
+        return new Runnable() {
+            @Override
+            public void run() {
+                threadTempo();
+                Log.i("log", "Executou getRunnable");
+            }
+        };
+    }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
     }
 
-    public void btAdicionarTarefaOnClick(View view){
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("log", "onResume MainActivity");
+        threadTempo();
+
+
+    }
+
+    public void btAdicionarTarefaOnClick(View view) {
         Intent it = new Intent(this, CadastroActivity.class);
         it.putExtra("id_pomodoro", (int) 0);
         startActivity(it);
     }
-
-
-
-
-
-
-
-
-
 
 
     @Override

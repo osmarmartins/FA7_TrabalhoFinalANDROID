@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/pomodoro"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -17,8 +17,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.CadastroActivity"/>
-        <activity android:name=".activity.CadastroExcluirActivity"/>
+        <activity
+            android:name=".activity.CadastroActivity"
+            android:parentActivityName=".activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.fa7.trabalhofinal.activity.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".activity.CadastroExcluirActivity"
+            android:parentActivityName=".activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.fa7.trabalhofinal.activity.MainActivity"/>
+        </activity>
+
         <service android:name=".service.ServiceTimer"/>
 
         <receiver android:name=".service.BroadcastReceiver">
