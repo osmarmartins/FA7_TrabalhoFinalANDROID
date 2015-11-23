@@ -4,6 +4,11 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="confirma_exclusao">CONFIRMA EXCLUSÃO?</string>
+
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+
     <string name="bt_iniciar">Iniciar</string>
     <string name="bt_concluir">Concluir</string>
 

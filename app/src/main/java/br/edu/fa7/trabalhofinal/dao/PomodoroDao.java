@@ -40,18 +40,25 @@ public class PomodoroDao {
     }
 
 
-    public void update(Context c){
+    public void update(Pomodoro pomodoro){
+        ContentValues values = new ContentValues();
+        values.put("_id", pomodoro.getId_pomodoro());
+        values.put("titulo", pomodoro.getTitulo());
+        values.put("descricao", pomodoro.getDescricao());
+        values.put("qtd_pomodoro", pomodoro.getQtd_pomodoro());
+        values.put("situacao", pomodoro.getSituacao());
 
+        db.update(TABLE_NAME, values, "_id=?", new String[]{pomodoro.getId_pomodoro().toString()});
     }
 
 
-    public void delete(Context c){
-
+    public void delete(int id){
+        db.delete(TABLE_NAME, "_id=?", new String[]{String.valueOf(id)});
     }
 
 
 
-    public Pomodoro find(Context c, Integer arg){
+    public Pomodoro findId(Integer id){
         Pomodoro pomodoro;
         pomodoro = new Pomodoro();
 
@@ -71,9 +78,8 @@ public class PomodoroDao {
 
             do{
                 Pomodoro pomodoro = new Pomodoro(
-                        c.getString(c.getColumnIndex("titulo")) +
-                                " ("+c.getInt(c.getColumnIndex("_id"))+") - " +
-                                c.getInt(c.getColumnIndex("situacao")),
+                        c.getInt(c.getColumnIndex("_id")),
+                        c.getString(c.getColumnIndex("titulo")),
                         c.getString(c.getColumnIndex("descricao")),
                         c.getInt(c.getColumnIndex("qtd_pomodoro")),
                         c.getInt(c.getColumnIndex("situacao"))
@@ -87,4 +93,13 @@ public class PomodoroDao {
 
         return pomodoros;
     }
+
+    // Método para verificar a existência de alguma tarefa em excecução
+    public int findStart(){
+
+        Cursor c = db.query(TABLE_NAME, null, "situacao=1", null, null, null, null);
+        return c.getCount();
+
+    }
+
 }

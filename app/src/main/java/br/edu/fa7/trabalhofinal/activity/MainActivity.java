@@ -1,9 +1,12 @@
 package br.edu.fa7.trabalhofinal.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,10 +14,35 @@ import android.widget.TextView;
 
 import br.edu.fa7.trabalhofinal.R;
 import br.edu.fa7.trabalhofinal.fragment.PomodoroFragment;
+import br.edu.fa7.trabalhofinal.service.ServiceTimer;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView tempoPomodoro;
+    private Handler handler;
+
+    private void serviceTimer(){
+        ServiceTimer.getTempo(this, (TextView) findViewById(R.id.tempoPomodoro));
+        Log.i("log", "Tempo inicial " + tempoPomodoro.getText());
+
+    }
+
+    private void threadTempo(){
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        serviceTimer();
+                    }
+                }, 1000);
+            }
+        };
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +54,22 @@ public class MainActivity extends AppCompatActivity {
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         this.tempoPomodoro = (TextView) findViewById(R.id.tempoPomodoro);
-        this.tempoPomodoro.setText("00:00");
+
+        threadTempo();
+
+/*
+        // Broadcast (notificação)
+        Intent it = new Intent("POMODORO");
+        PendingIntent pit = PendingIntent
+                .getBroadcast(MainActivity.this, 0, it, 0);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.set(Calendar.SECOND, 15);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pit);
+*/
 
         // Fragment da Lista de Tarefas
         PomodoroFragment pomodoroFragment = (PomodoroFragment) getSupportFragmentManager().findFragmentByTag("myPomodoroFragment");
@@ -40,10 +83,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
+
     public void btAdicionarTarefaOnClick(View view){
         Intent it = new Intent(this, CadastroActivity.class);
+        it.putExtra("id_pomodoro", (int) 0);
         startActivity(it);
     }
+
+
 
 
 

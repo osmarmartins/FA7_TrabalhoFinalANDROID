@@ -29,8 +29,8 @@ public class PomodoroFragment extends Fragment {
     // Lista de tarefas (pomodoros)
     private void recyclerViewItens(){
         mList = new PomodoroDao(getContext()).findAll();
-        PomodoroAdapter adapter = new PomodoroAdapter(getActivity(), mList);
-        mRecyclerView.setAdapter(adapter);
+        PomodoroAdapter pomodoroAdapter = new PomodoroAdapter(getActivity(), mList);
+        mRecyclerView.setAdapter(pomodoroAdapter);
     }
 
 
@@ -62,13 +62,6 @@ public class PomodoroFragment extends Fragment {
 //            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 //                super.onScrolled(recyclerView, dx, dy);
 //                Log.i("log", "onScrolled");
-//
-//                LinearLayoutManager llm = (LinearLayoutManager) mRecyclerView.getLayoutManager();
-//                PomodoroAdapter adapter = (PomodoroAdapter) mRecyclerView.getAdapter();
-//
-//                if (mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1) {
-//                    List<Pomodoro> listAux = new PomodoroDao().findNext(5);
-//                }
 //
 //            }
 //        });

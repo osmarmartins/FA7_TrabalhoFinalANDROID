@@ -13,4 +13,7 @@
     <color name="colorIcons">#FFFFFF</color>
     <color name="colorDivider">#B6B6B6</color>
 
+    <color name="colorContextMenu">#616161</color>
+
+
 </resources>
