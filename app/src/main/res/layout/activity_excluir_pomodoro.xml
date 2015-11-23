@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_excluir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/excluir"/>
+
+    <TextView
+        android:id="@+id/excluir_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/img_excluir"
+        android:text="Titulo"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/excluir_descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/excluir_titulo"
+        android:text="Descricao"
+        android:textSize="10sp"/>
+
+    <TextView
+        android:id="@+id/excluir_confirmacao"
+        android:text="@string/confirma_exclusao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/excluir_descricao"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/bt_excluir_sim"
+        android:text="@string/sim"
+        android:layout_width="80dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/excluir_confirmacao"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/bt_excluir_nao"
+        android:text="@string/nao"
+        android:layout_width="80dp"
+        android:layout_marginRight="50dp"
+        android:layout_alignTop="@id/bt_excluir_sim"
+        android:layout_alignParentRight="true"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>
