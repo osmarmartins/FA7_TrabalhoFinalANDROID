@@ -73,8 +73,6 @@ public class PomodoroFragment extends Fragment {
     public void onResume() {
         super.onResume();
         recyclerViewItens();
-
-        Log.i("log", "onResumed");
     }
 
 }

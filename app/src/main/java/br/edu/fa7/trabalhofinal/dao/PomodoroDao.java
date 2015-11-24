@@ -59,8 +59,20 @@ public class PomodoroDao {
 
 
     public Pomodoro findId(Integer id){
-        Pomodoro pomodoro;
-        pomodoro = new Pomodoro();
+
+        Pomodoro pomodoro = null;
+        Cursor c = db.query(TABLE_NAME, null, "_id=?", new String[]{String.valueOf(id)}, null, null, null);
+
+        if(c.getCount() > 0) {
+            c.moveToFirst();
+            pomodoro = new Pomodoro(
+                    c.getInt(c.getColumnIndex("_id")),
+                    c.getString(c.getColumnIndex("titulo")),
+                    c.getString(c.getColumnIndex("descricao")),
+                    c.getInt(c.getColumnIndex("qtd_pomodoro")),
+                    c.getInt(c.getColumnIndex("situacao"))
+            );
+        }
 
         return pomodoro;
     }

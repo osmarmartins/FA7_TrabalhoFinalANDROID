@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.Message;
-import android.util.Log;
 import android.widget.TextView;
 
 /**
@@ -14,16 +13,16 @@ import android.widget.TextView;
  */
 public class ServiceTimer extends Service {
 
-    private static final int SEGUNDOS_POMODORO = 15;// 1500; // (1500s = 25:00)
-    private static final int MENSAGEM_TEMPO = 1;
+    private static final int SEGUNDOS_POMODORO = 1500; // (1500s = 25:00)
 
     private IBinder binder;
-    private static Boolean stop;
-    private Integer segundos;
+    private Boolean stop;
+    private static Integer segundos;
     private static String tempo = "00:00";
 
 
     public ServiceTimer(){
+        this.segundos = 0;
         this.tempo = "00:00";
         this.binder = new LocalBinder();
         this.stop=false;
@@ -39,11 +38,12 @@ public class ServiceTimer extends Service {
         act.runOnUiThread(new Runnable() {
                               @Override
                               public void run() {
-                                  if(!stop) {
-                                      tv.setText(tempo);
+                                  // Critica p/ caso de término forçado (stop)
+                                  if(segundos<0){
+                                      tempo="00:00";
                                   }
+                                  tv.setText(tempo);
 
-                                  Log.i("log", "getTimer - " + tv.getText());
                               }
                           }
         );
@@ -51,9 +51,6 @@ public class ServiceTimer extends Service {
     }
 
     public void start(final Integer qtdPomodoros){
-
-        Message msg = new Message();
-        msg.what = MENSAGEM_TEMPO;
 
         new Thread(new Runnable() {
 
@@ -78,8 +75,6 @@ public class ServiceTimer extends Service {
                             tempo = "0"+tempo;
                         }
 
-                        Log.i("log", "Simulador Service: " + tempo + "     segundos:" + segundos.toString());
-
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -93,6 +88,7 @@ public class ServiceTimer extends Service {
 
 
     public void stop(){
+        this.segundos=0;
         this.tempo = "00:00";
         this.stop=true;
     }
@@ -104,8 +100,4 @@ public class ServiceTimer extends Service {
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
 }

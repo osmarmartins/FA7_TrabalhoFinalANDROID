@@ -6,8 +6,19 @@
 
     <string name="confirma_exclusao">CONFIRMA EXCLUSÃO?</string>
 
+    <string name="localizar_tarefa">Informe o número da Tarefa:</string>
+
+
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
+    <string name="ok">Ok</string>
+    <string name="sair">Sair</string>
+
+
+    <string name="nova_tarefa">Nova Tarefa</string>
+    <string name="editar_tarefa">Editar Tarefa</string>
+    <string name="excluir_tarefa">Excluir Tarefa</string>
+    <string name="buscar_tarefa">Localizar Tarefa</string>
 
     <string name="bt_iniciar">Iniciar</string>
     <string name="bt_concluir">Concluir</string>

@@ -50,22 +50,22 @@
     <Button
         android:id="@+id/bt_iniciar"
         android:text="@string/bt_iniciar"
-        android:layout_width="50dp"
-        android:layout_height="25dp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:textSize="10sp"
-        android:padding="5dp"
-        android:layout_marginRight="20dp"/>
+        android:padding="10dp"
+        android:layout_marginRight="40dp"/>
 
     <Button
         android:id="@+id/bt_concluir"
         android:text="@string/bt_concluir"
         android:enabled="false"
-        android:layout_width="50dp"
-        android:layout_height="25dp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
         android:textSize="8sp"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_alignTop="@+id/tarefa_qtd_pomodoro"
         android:layout_alignLeft="@+id/bt_iniciar"/>
 
@@ -73,11 +73,11 @@
         android:id="@+id/img_context_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_dots_vertical_black_24dp"
+        android:src="@drawable/dots_vertical_48"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="0dp"
         android:layout_marginEnd="17dp" />
 
 

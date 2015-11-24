@@ -19,6 +19,7 @@ import java.util.List;
 import br.edu.fa7.trabalhofinal.R;
 import br.edu.fa7.trabalhofinal.activity.CadastroActivity;
 import br.edu.fa7.trabalhofinal.activity.CadastroExcluirActivity;
+import br.edu.fa7.trabalhofinal.activity.CadastroLocalizarActivity;
 import br.edu.fa7.trabalhofinal.dao.PomodoroDao;
 import br.edu.fa7.trabalhofinal.model.ContextMenuItem;
 import br.edu.fa7.trabalhofinal.model.Pomodoro;
@@ -119,6 +120,11 @@ public class PomodoroAdapter extends RecyclerView.Adapter<PomodoroAdapter.Pomodo
         context.startActivity(it);
     }
 
+    public void localizarPomodoro(){
+        Intent it = new Intent(context, CadastroLocalizarActivity.class);
+        context.startActivity(it);
+    }
+
 
     public class PomodoroViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -130,6 +136,8 @@ public class PomodoroAdapter extends RecyclerView.Adapter<PomodoroAdapter.Pomodo
         private ImageView imgContextMenu;
         private static final int EDITAR = 0;
         private static final int EXCLUIR = 1;
+        private static final int LOCALIZAR = 2;
+
 
 
         public PomodoroViewHolder(View itemView) {
@@ -197,6 +205,11 @@ public class PomodoroAdapter extends RecyclerView.Adapter<PomodoroAdapter.Pomodo
 
                                 case EXCLUIR:
                                     excluirPomodoro(getAdapterPosition());
+                                    listPopupWindow.dismiss();
+                                    break;
+
+                                case LOCALIZAR:
+                                    localizarPomodoro();
                                     listPopupWindow.dismiss();
                                     break;
 
